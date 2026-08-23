@@ -156,6 +156,37 @@ footer .footer-column>b{margin:0 0 9px;color:var(--brown);font-size:14px}.footer
   .floating{right:8px;bottom:calc(10px + env(safe-area-inset-bottom));gap:7px}.floating a{width:44px;height:44px;font-size:17px}
   .lightbox{max-width:calc(100vw - 24px)}.lightbox button{top:10px;right:10px;width:44px;height:44px}
 }
+
+/* Rebuilt welcome section: clean editorial photo pair without overlap */
+.intro{grid-template-columns:minmax(0,.95fr) minmax(390px,.85fr);gap:clamp(58px,8vw,128px);align-items:center}
+.intro-images{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:14px;align-items:end;height:clamp(520px,46vw,680px);min-height:0;padding:0!important}
+.intro-images:before{display:none}
+.intro-images img:first-child,.intro-images img:last-child{position:static!important;display:block;width:100%!important;max-width:none;height:100%!important;aspect-ratio:auto!important;object-fit:cover!important;background:transparent;border:0;box-shadow:none}
+.intro-images img:first-child{grid-column:1;object-position:center 28%;border-radius:48% 48% 10px 10px}
+.intro-images img:last-child{grid-column:2;height:72%!important;object-position:center 18%;border-radius:10px}
+.intro-copy h2{max-width:12ch;font-size:clamp(48px,4.7vw,70px)}
+.intro-copy p:not(.script){max-width:60ch}
+@media(max-width:1050px){.intro{grid-template-columns:1fr;gap:58px}.intro-images{width:min(100%,720px);height:600px}.intro-copy{max-width:680px}}
+@media(max-width:767px){.intro{gap:48px}.intro-images{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:9px;width:100%;height:clamp(380px,112vw,500px)}.intro-images img:first-child{border-radius:46% 46% 8px 8px}.intro-images img:last-child{height:68%!important;border-radius:8px}.intro-copy h2{max-width:11ch;font-size:clamp(38px,11vw,48px)}}
+@media(max-width:380px){.intro-images{height:390px}.intro-images img:last-child{height:64%!important}}
+
+/* Refined salon typography */
+:root{--display:"Marcellus",Georgia,serif}
+.hero h1,h1,h2,h3,.service h3,.price-group h3,.massage-list h3{font-family:var(--display);letter-spacing:-.025em}
+.script,.spa-quote{font-family:"Bodoni Moda",Georgia,serif}
+.script{font-weight:500;letter-spacing:-.015em}
+body{font-family:"Manrope",Arial,sans-serif}
+
+/* Reliable, art-directed welcome photography */
+.intro-images{display:grid;grid-template-columns:minmax(0,1.28fr) minmax(0,.72fr);gap:16px;align-items:end;height:clamp(520px,44vw,650px);padding:0!important}
+.intro-images:before{display:none!important}
+.intro-photo{position:relative;isolation:isolate;width:100%;margin:0;overflow:hidden;background-repeat:no-repeat;background-size:cover}
+.intro-photo>img{position:absolute!important;inset:0;width:100%!important;height:100%!important;opacity:0;pointer-events:none}
+.intro-photo-main{height:100%;background-image:url("../images/1.jpg");background-position:center 28%;border-radius:48% 48% 10px 10px}
+.intro-photo-accent{height:62%;margin-bottom:7%;background-image:url("../images/10.jpg");background-position:center 16%;border-radius:10px}
+@media(max-width:1050px){.intro-images{height:580px}}
+@media(max-width:767px){.intro-images{grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr);gap:9px;height:clamp(390px,108vw,490px)}.intro-photo-main{border-radius:45% 45% 8px 8px}.intro-photo-accent{height:58%;margin-bottom:5%;border-radius:8px}}
+@media(max-width:380px){.intro-images{height:380px}.intro-photo-accent{height:56%}}
 @media(max-width:370px){
   .section,.massage,.contact,.loyalty,.social,.spa,.final-cta{padding-left:16px;padding-right:16px}
   .hero{padding-left:16px;padding-right:16px}.hero h1{font-size:44px}
