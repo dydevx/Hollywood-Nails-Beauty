@@ -7,8 +7,8 @@ syncHeader();
 const headerObserver=new IntersectionObserver(syncHeader,{threshold:1});
 headerObserver.observe(document.querySelector('.hero'));
 document.addEventListener('scrollend',syncHeader,{passive:true});
-toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!open));menu.classList.toggle('open',!open);document.body.classList.toggle('menu-open',!open)});
-menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{toggle.setAttribute('aria-expanded','false');menu.classList.remove('open');document.body.classList.remove('menu-open')}));
+toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!open));menu.classList.toggle('open',!open);menu.inert=open;document.body.classList.toggle('menu-open',!open)});
+menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{toggle.setAttribute('aria-expanded','false');menu.classList.remove('open');menu.inert=true;document.body.classList.remove('menu-open')}));
 const reveals=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');reveals.unobserve(entry.target)}}),{rootMargin:'0px 0px -8% 0px',threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>reveals.observe(el));
 const dialog=document.querySelector('.lightbox');
@@ -31,3 +31,16 @@ updateProgress();
 document.querySelectorAll('.service-mosaic .reveal,.price-columns .reveal,.massage-list .reveal,.gallery-grid .reveal').forEach((item,index)=>{
   item.style.setProperty('--reveal-order',String(index%6));
 });
+
+const sectionLinks=[...document.querySelectorAll('.desktop-nav a[href^="#"],.mobile-nav-links a[href^="#"]')];
+const trackedSections=[...new Set(sectionLinks.map(link=>document.querySelector(link.getAttribute('href'))).filter(Boolean))];
+const sectionObserver=new IntersectionObserver(entries=>{
+  const current=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+  if(!current)return;
+  sectionLinks.forEach(link=>{
+    const active=link.getAttribute('href')===`#${current.target.id}`;
+    link.classList.toggle('active',active);
+    if(active)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');
+  });
+},{rootMargin:'-25% 0px -60% 0px',threshold:[0,.15,.4]});
+trackedSections.forEach(section=>sectionObserver.observe(section));
