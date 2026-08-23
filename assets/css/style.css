@@ -187,6 +187,40 @@ body{font-family:"Manrope",Arial,sans-serif}
 @media(max-width:1050px){.intro-images{height:580px}}
 @media(max-width:767px){.intro-images{grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr);gap:9px;height:clamp(390px,108vw,490px)}.intro-photo-main{border-radius:45% 45% 8px 8px}.intro-photo-accent{height:58%;margin-bottom:5%;border-radius:8px}}
 @media(max-width:380px){.intro-images{height:380px}.intro-photo-accent{height:56%}}
+
+/* Purposeful motion and interaction layer */
+.scroll-progress{position:fixed;z-index:70;top:0;left:0;width:100%;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left center;pointer-events:none}
+.button{position:relative;isolation:isolate;overflow:hidden;transition:transform 180ms var(--ease),background-color 240ms var(--ease),border-color 240ms var(--ease),color 240ms var(--ease)}
+.button:before{content:"";position:absolute;z-index:-1;inset:0;background:rgba(255,255,255,.18);transform:translateX(-105%) skewX(-18deg);transition:transform 420ms var(--ease)}
+.button:hover:before{transform:translateX(105%) skewX(-18deg)}
+.button:active{transform:translateY(1px) scale(.98)}
+.desktop-nav a,.footer-column>a,.text-link{transition:color 220ms ease,border-color 220ms ease}
+.intro-photo{transition:transform 560ms var(--ease),filter 560ms var(--ease)}
+.intro-photo-main:hover{transform:translateY(-5px);filter:saturate(1.05)}
+.intro-photo-accent:hover{transform:translateY(-8px);filter:saturate(1.07)}
+.service{transition:transform 360ms var(--ease),background-color 360ms var(--ease)}
+.service:hover{transform:translateY(-5px)}
+.service img{transition:transform 650ms var(--ease),filter 500ms ease}
+.service:hover img{transform:scale(1.025);filter:saturate(.95)}
+.price-group li{transition:color 220ms ease,transform 220ms var(--ease)}
+.price-group li:hover{color:var(--brown);transform:translateX(4px)}
+.massage-list article{transition:background-color 260ms ease,padding-inline 320ms var(--ease)}
+.massage-list article:hover{background:rgba(170,122,44,.045);padding-inline:12px}
+.massage-list span{transition:background-color 220ms ease,border-color 220ms ease,transform 180ms var(--ease)}
+.massage-list span:hover{background:#fff;border-color:rgba(170,122,44,.55);transform:translateY(-2px)}
+.gallery-item:after{content:"+";position:absolute;right:14px;bottom:14px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(255,254,250,.92);color:var(--brown);font-size:22px;opacity:0;transform:translateY(8px);transition:opacity 240ms ease,transform 280ms var(--ease)}
+.gallery-item{position:relative}.gallery-item:hover:after,.gallery-item:focus-visible:after{opacity:1;transform:none}
+.social-link i,.floating i{transition:transform 260ms var(--ease)}
+.social-link:hover i{transform:rotate(-8deg) scale(1.08)}
+.floating a:hover i{transform:scale(1.1)}
+.final-cta>img{transition:transform 700ms var(--ease),filter 500ms ease}.final-cta:hover>img{transform:scale(1.012);filter:saturate(.86) contrast(.98)}
+.lightbox[open]{animation:lightbox-in 280ms var(--ease) both}.lightbox[open]::backdrop{animation:backdrop-in 220ms ease both}
+.js .service-mosaic .reveal,.js .price-columns .reveal,.js .massage-list .reveal,.js .gallery-grid .reveal{transition-delay:calc(var(--reveal-order,0) * 55ms)}
+.js .reveal.visible{transition-delay:calc(var(--reveal-order,0) * 55ms)}
+@keyframes lightbox-in{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:none}}
+@keyframes backdrop-in{from{background:rgba(32,22,16,0)}to{background:rgba(32,22,16,.9)}}
+@media(max-width:767px){.scroll-progress{height:3px}.service:hover,.intro-photo-main:hover,.intro-photo-accent:hover{transform:none}.massage-list article:hover{padding-inline:0}.gallery-item:after{right:8px;bottom:8px;width:32px;height:32px;opacity:1;transform:none;font-size:18px}.button:before{display:none}}
+@media(prefers-reduced-motion:reduce){.scroll-progress{display:none}.button:before,.gallery-item:after{transition:none}.intro-photo,.service,.service img,.price-group li,.massage-list article,.massage-list span,.final-cta>img{transform:none!important}}
 @media(max-width:370px){
   .section,.massage,.contact,.loyalty,.social,.spa,.final-cta{padding-left:16px;padding-right:16px}
   .hero{padding-left:16px;padding-right:16px}.hero h1{font-size:44px}
